@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
+import { Counter } from './bases/Counter';
 
 function App() {
   return (
     <Fragment>
-      <h1>React</h1>
-      <hr/>
+      <Counter initialValue={15}/>
     </Fragment>
   );
 }
