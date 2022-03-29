@@ -1,6 +1,10 @@
 import React, { Fragment, useState } from 'react'
 
-export const Counter = ( {initialValue = 0} ) => {
+interface CounterProps {
+    initialValue?: number /* ? indicates that is optional; if ? isn't present indicate that is required*/
+}
+
+export const Counter = ( {initialValue = 0}: CounterProps) => {
     const [counter, setCounter] = useState(initialValue);
 
     const handleClick = () => {
