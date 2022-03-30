@@ -1,10 +1,12 @@
 import gsap from 'gsap';
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 
 const MAXIMUN_CLICK = 10;
 
 export const CounterEffect = () => {
     const [counter, setCounter] = useState(5);
+
+    const counterElement = useRef<HTMLHeadingElement>(null);
 
     useEffect(() => {
       if(counter < 10) return;
@@ -12,8 +14,8 @@ export const CounterEffect = () => {
       // console.log('Se ha llegado al valor máximo.');
       console.log('%cSe ha llegado al valor máximo.', 'color: red; background-color: black');
 
-      gsap.to('h2', { y: -10, duration: 0.2, ease: 'ease.out' } ).then( () => {
-        gsap.to('h2', { y: 0, duration: 1, ease: 'bounce.out' });
+      gsap.to(counterElement.current, { y: -10, duration: 0.2, ease: 'ease.out' } ).then( () => {
+        gsap.to(counterElement.current, { y: 0, duration: 1, ease: 'bounce.out' });
       } );
     }, [counter])
     
@@ -26,7 +28,7 @@ export const CounterEffect = () => {
   return (
     <Fragment>
         <h1>CounterEffect: </h1>
-        <h2>{ counter }</h2>
+        <h2 ref={counterElement}>{ counter }</h2>
         <button onClick={ handleClick }> +1 </button>
     </Fragment>
   )

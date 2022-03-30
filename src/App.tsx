@@ -11,6 +11,8 @@ function App() {
       <CounterBy />
       <hr/>
       <CounterEffect />
+      <hr/>
+      <CounterEffect />
     </Fragment>
   );
 }
