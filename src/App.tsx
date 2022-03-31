@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
+import { Navigation } from './routes/Navigation';
 
 function App() {
   return (
     <Fragment>
-      <h1>React</h1>
-      <hr/>
+      <Navigation/>
     </Fragment>
   );
 }
