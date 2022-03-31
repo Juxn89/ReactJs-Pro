@@ -4,6 +4,7 @@ import { CounterBy } from './bases/CounterBy';
 import { CounterEffect } from './bases/CounterEffect';
 import { CounterHook } from './bases/CounterHook';
 import { CounterReducer } from './bases/CounterReducer';
+import { CounterReducerRefactoring } from './reducers/CounterReducerRefactoring';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <CounterHook />
       <hr/>
       <CounterReducer />
+      <hr/>
+      <CounterReducerRefactoring/>
     </Fragment>
   );
 }

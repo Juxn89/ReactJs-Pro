@@ -41,7 +41,7 @@ export const CounterReducer = ( ) => {
         dispatch({type: 'reset'});
     }
 
-    const handleIncreaBy = ( value: number ) => {
+    const handleIncreaseBy = ( value: number ) => {
       dispatch({type: 'IncreaseBy', payload: { value }});
     }
 
@@ -51,9 +51,9 @@ export const CounterReducer = ( ) => {
         <pre>
             { JSON.stringify(counterState, null, 2) }
         </pre>
-        <button onClick={ () => handleIncreaBy(1) }> +1 </button>
-        <button onClick={ () => handleIncreaBy(5) }> +5 </button>
-        <button onClick={ () => handleIncreaBy(10) }> +10 </button>
+        <button onClick={ () => handleIncreaseBy(1) }> +1 </button>
+        <button onClick={ () => handleIncreaseBy(5) }> +5 </button>
+        <button onClick={ () => handleIncreaseBy(10) }> +10 </button>
         <button onClick={ handleReset }> Reset </button>
     </Fragment>
   )
