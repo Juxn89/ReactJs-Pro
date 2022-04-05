@@ -1,10 +1,11 @@
 import style from '../styles/styles.module.css';
 import noImage from '../assets/no-image.jpg'
 import { useProduct } from '../hooks/useProduct';
-import { ReactElement } from 'react';
+import { createContext, ReactElement, useContext } from 'react';
 
 interface Props {
-  product: Product
+  product: Product,
+  children?: ReactElement | ReactElement[]
 }
 
 interface Product {
@@ -21,19 +22,43 @@ interface ProductButtonsProps {
   increaseBy: (value: number) => void
 }
 
+interface ProductContextProps {
+  counter: number,
+  increaseBy: (value: number) => void,
+  product: Product
+}
+
+const ProductContext = createContext( {  } as ProductContextProps );
+const { Provider } = ProductContext;
+
 export const ProductImage = ( { img = '' } ) => {
+  const { product } = useContext( ProductContext );
+  let imgToShow: string;
+
+  if(img) imgToShow = img;
+  else if (product.img) imgToShow = product.img;
+  else imgToShow = noImage;
+
   return (
-    <img src={ img ? img : noImage } alt="Coffee Mug" className={ style.productImg }/>
+    <img src={ imgToShow } alt="Coffee Mug" className={ style.productImg }/>
   );
 }
 
-export const ProductTitle = ( { title }: { title: string } ) => {
+export const ProductTitle = ( { title }: { title?: string } ) => {
+  const { product } = useContext( ProductContext );
+  let titleToShow: string;
+
+  if(title) titleToShow = title;
+  else titleToShow = product.title;
+
   return (
-    <span className={ style.productDescription }> { title } </span>
+    <span className={ style.productDescription }> { titleToShow } </span>
   );
 };
 
-export const ProductButtons = ( { counter, increaseBy }: ProductButtonsProps ) => {
+export const ProductButtons = () => {
+  const { counter, increaseBy } = useContext( ProductContext )
+
   return (
     <div className={ style.buttonsContainer }>
       <button className={ style.buttonMinus } onClick= { () => increaseBy(-1) }> - </button>
@@ -43,16 +68,23 @@ export const ProductButtons = ( { counter, increaseBy }: ProductButtonsProps ) =
   );
 }
 
-export const ProductCard = ( { product }: Props ) => {
+export const ProductCard = ( { children, product }: Props ) => {
   const { counter, increaseBy } = useProduct();
 
   return (
-    <div className={ style.productCard }>
-      <ProductImage img={ product.img } />
+    <Provider value={ { counter, increaseBy, product } }>
+      <div className={ style.productCard }>
+        { children }
+        {/* <ProductImage img={ product.img } />
 
-      <ProductTitle title={ product.title } />
+        <ProductTitle title={ product.title } />
 
-      <ProductButtons counter={ counter } increaseBy= { increaseBy } />
-    </div>
+        <ProductButtons counter={ counter } increaseBy= { increaseBy } /> */}
+      </div>
+    </Provider>
   )
 }
+
+ProductCard.Title = ProductTitle;
+ProductCard.Image = ProductImage;
+ProductCard.Buttons = ProductButtons;
