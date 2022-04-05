@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductButtons, ProductCard, ProductImage, ProductTitle } from '../components/ProductCard';
+import { ProductButtons, ProductCard, ProductImage, ProductTitle } from '../components'
 
 export const ShoppingPage = () => {
   const product = {
