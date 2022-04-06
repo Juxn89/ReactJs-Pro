@@ -7,7 +7,6 @@ indent_style = space
 indent_size = 2
 insert_final_newline = false
 trim_trailing_whitespace = true
-trimAutoWhitespace
 
 [*.md]
 max_line_length = true

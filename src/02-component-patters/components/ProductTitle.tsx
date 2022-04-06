@@ -2,7 +2,12 @@ import { useContext } from 'react';
 import { ProductContext } from './ProductCard';
 import style from '../styles/styles.module.css';
 
-export const ProductTitle = ( { title }: { title?: string } ) => {
+export interface Props {
+  className?: string
+  title?: string;
+}
+
+export const ProductTitle = ( { title, className }: Props ) => {
   const { product } = useContext( ProductContext );
   let titleToShow: string;
 
@@ -10,6 +15,6 @@ export const ProductTitle = ( { title }: { title?: string } ) => {
   else titleToShow = product.title;
 
   return (
-    <span className={ style.productDescription }> { titleToShow } </span>
+    <span className={ `${style.productDescription} ${className}` }> { titleToShow } </span>
   );
 };
