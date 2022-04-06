@@ -4,4 +4,4 @@ This repository is part of [Fernando Herrera](https://fernando-herrera.com/)'s c
 ### Description
 This repository has multiples branches for each project in the course. Firstly use `npm install` later `npm start` to run de project.
 
-This branch is a fork from *02-react-app*. The purpouse of this project is explain about *Compound Component Patter* and the use of *useContext* and *createContext* to share information with childrens components.
+This branch is a fork from *03-compound-component-pattern*. The purpouse of this project is explain about *Extensible Styles* and *React CSSProperties*.
