@@ -25,8 +25,8 @@ export const ShoppingPage = () => {
 
   const [shoppingCart, setshoppingCart] = useState<{ [key: string]: ProductInCart }>({});
 
-  const onProdcutCountChange = () => {
-    console.log('onProductCountChange');
+  const onProdcutCountChange = ({count, product}: { count: number, product: Product }) => {
+    console.log('onProductCountChange', product);
   }
 
   return (
@@ -37,7 +37,7 @@ export const ShoppingPage = () => {
 
         {
           products.map( product => (
-            <ProductCard key={ product.id } product={ product } className='bg-dark text-white' onChange={ () => onProdcutCountChange() }>
+            <ProductCard key={ product.id } product={ product } className='bg-dark text-white' onChange={ (event) => onProdcutCountChange(event) }>
               <ProductImage className='custom-image'/>
               <ProductTitle className='text-bold'/>
               <ProductButtons className='custom-buttons'/>
@@ -48,7 +48,7 @@ export const ShoppingPage = () => {
       </div>
 
       <div className='shopping-cart'>
-        <ProductCard product={ product2 } className='bg-dark text-white' style={ { width: '100px' } } onChange={ () => onProdcutCountChange() } >
+        <ProductCard product={ product2 } className='bg-dark text-white' style={ { width: '100px' } } >
           <ProductImage className='custom-image'/>
           <ProductTitle className='text-bold'/>
           <ProductButtons className='custom-buttons'/>
