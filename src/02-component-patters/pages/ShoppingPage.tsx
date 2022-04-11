@@ -26,7 +26,21 @@ export const ShoppingPage = () => {
   const [shoppingCart, setshoppingCart] = useState<{ [key: string]: ProductInCart }>({});
 
   const onProdcutCountChange = ({count, product}: { count: number, product: Product }) => {
-    console.log('onProductCountChange', product);
+    // console.log('onProductCountChange', product);
+
+    setshoppingCart( oldShoppingCart => {
+
+      if(count === 0) {
+        // delete ({...oldShoppingCart})[product.id];
+        const { [product.id]: toDelete, ...rest } = oldShoppingCart;
+        return rest;
+      }
+
+      return {
+        ...oldShoppingCart,
+        [product.id]: { ...product, count }
+      }
+     } );
   }
 
   return (
@@ -48,11 +62,16 @@ export const ShoppingPage = () => {
       </div>
 
       <div className='shopping-cart'>
-        <ProductCard product={ product2 } className='bg-dark text-white' style={ { width: '100px' } } >
-          <ProductImage className='custom-image'/>
-          <ProductTitle className='text-bold'/>
-          <ProductButtons className='custom-buttons'/>
-        </ProductCard>
+        {
+          Object.entries(shoppingCart).map( ([key, product]) => (
+            <ProductCard key={key} product={ product } className='bg-dark text-white' style={ { width: '100px' } } >
+              <ProductImage className='custom-image'/>
+              <ProductTitle className='text-bold'/>
+              <ProductButtons className='custom-buttons' style={ { display: 'flex', justifyContent: 'center' } }/>
+            </ProductCard>
+          ))
+        }
+
       </div>
     </div>
   )
