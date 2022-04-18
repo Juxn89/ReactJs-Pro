@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { onChanceArgs, Product } from '../interfaces/interfaces';
+import { InitialValues, onChanceArgs, Product } from '../interfaces/interfaces';
 
 interface useProductArgs {
   product: Product,
   onChange?: (args: onChanceArgs) => void,
-  value?: number
+  value?: number,
+  initialValue?: InitialValues
 }
 
-export const useProduct = ({onChange, product, value = 0}: useProductArgs) => {
-  const [counter, setCounter] = useState(value);
+export const useProduct = ({onChange, product, value = 0, initialValue}: useProductArgs) => {
+  const [counter, setCounter] = useState<number>( initialValue?.count || value );
 
   useEffect(() => {
     setCounter(value);
