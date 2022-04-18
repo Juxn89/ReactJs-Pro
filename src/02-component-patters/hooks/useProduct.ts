@@ -12,7 +12,7 @@ export const useProduct = ({onChange, product, value = 0, initialValue}: useProd
   const [counter, setCounter] = useState<number>( initialValue?.count || value );
   const isMounted = useRef(false);
 
-  console.log(counter);
+  console.log(initialValue, counter);
 
   useEffect( () => {
     isMounted.current = true;

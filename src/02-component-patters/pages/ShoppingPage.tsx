@@ -10,9 +10,17 @@ export const ShoppingPage = () => {
       <div>ShoppingPage</div>
       <hr/>
       <ProductCard key={ product.id } product={ product } className='bg-dark text-white' initialValue={ { count: 4, maxCount: 10 } }>
-        <ProductImage className='custom-image'/>
-        <ProductTitle className='text-bold'/>
-        <ProductButtons className='custom-buttons'/>
+        {
+          (message) => (
+            <>
+              <ProductImage className='custom-image'/>
+              <ProductTitle className='text-bold'/>
+              <ProductButtons className='custom-buttons'/>
+              <h2> { message } </h2>
+            </>
+          )
+        }
+
       </ProductCard>
     </div>
   )

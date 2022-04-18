@@ -8,7 +8,8 @@ import styles from '../styles/styles.module.css';
 
 export interface Props {
   product: Product;
-  children?: ReactElement | ReactElement[];
+  // children?: ReactElement | ReactElement[];
+  children: (message: string) => JSX.Element;
   className?: string;
   style?: CSSProperties;
   onChange?: ( args: onChanceArgs ) => void;
@@ -25,7 +26,7 @@ export const ProductCard = ( { children, product, className, style, onChange, va
   return (
     <Provider value={ { counter, increaseBy, product } }>
       <div className={ `${styles.productCard} ${className}` } style={ style }>
-        { children }
+        { children('Hello world!') }
         {/* <ProductImage img={ product.img } />
 
         <ProductTitle title={ product.title } />
