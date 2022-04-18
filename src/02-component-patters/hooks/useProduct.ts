@@ -14,15 +14,15 @@ export const useProduct = ({onChange, product, value = 0, initialValue}: useProd
 
   console.log(initialValue, counter);
 
-  useEffect( () => {
-    isMounted.current = true;
-  }, [] );
-
   useEffect(() => {
     if(!isMounted.current) return;
 
     setCounter(value);
   }, [value]);
+
+  useEffect( () => {
+    isMounted.current = true;
+  }, [] );
 
   const increaseBy = (value:number) => {
     let newValue = Math.max(counter + value, 0);
