@@ -1,11 +1,9 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { useFormik, Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 
 import '../styles/styles.css';
-import { MyTextInput } from '../components/MyTextInput';
-import { MySelect } from '../components/MySelect';
-import { MyCheckbox } from '../components/MyCheckbox';
+import { MyTextInput, MySelect, MyCheckbox } from '../components';
 
 export const FormikAbstraction = () => {
   return (
