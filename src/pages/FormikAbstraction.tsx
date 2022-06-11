@@ -5,6 +5,7 @@ import { useFormik, Formik, Field, Form, ErrorMessage } from 'formik';
 import '../styles/styles.css';
 import { MyTextInput } from '../components/MyTextInput';
 import { MySelect } from '../components/MySelect';
+import { MyCheckbox } from '../components/MyCheckbox';
 
 export const FormikAbstraction = () => {
   return (
@@ -45,11 +46,7 @@ export const FormikAbstraction = () => {
                   <option value="it-junior">IT Junior</option>
                 </MySelect>
 
-                <label>
-                  <Field name="terms" type="checkbox"/>
-                  Terms of conditions
-                </label>
-                <ErrorMessage name="terms" component="span"/>
+                <MyCheckbox label='Terms and conditions' name='terms'/>
 
                 <button type='submit'>Sumit</button>
               </Form>
