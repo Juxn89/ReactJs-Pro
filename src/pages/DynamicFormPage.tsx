@@ -19,6 +19,14 @@ for(const input of formJSON){
     if(rule.type === 'required') {
       schema = schema.required(`${input.label} is required`)
     }
+
+    if(rule.type === 'minLenght') {
+      schema = schema.min( (rule as any).value || 2, `The minimun characters is ${(rule as any).value || 2}`);
+    }
+
+    if(rule.type === 'email') {
+      schema = schema.email('Invalid email format')
+    }
   }
 
   requiredFields[input.name] = schema;

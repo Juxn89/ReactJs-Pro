@@ -8,6 +8,10 @@
     "validations": [
       {
         "type": "required"
+      },
+      {
+        "type": "minLenght",
+        "value": 5
       }
     ]
   },
@@ -16,14 +20,27 @@
     "name": "lastName",
     "placeholder": "Last Name",
     "label": "Last name",
-    "value": ""
+    "value": "",
+    "validations": [
+      {
+        "type": "required"
+      }
+    ]
   },
   {
     "type": "email",
     "name": "email",
     "placeholder": "Email address",
     "label": "Email address",
-    "value": ""
+    "value": "",
+    "validations": [
+      {
+        "type": "required"
+      },
+      {
+        "type": "email"
+      }
+    ]
   },
   {
     "type": "select",
