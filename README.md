@@ -1,23 +1,26 @@
-## React JS - Pro 
-This repository is part of [Fernando Herrera](https://fernando-herrera.com/)'s course on [Udemy](https://www.udemy.com/course/react-pro/)
-To create a react project using *TypeScript* on command prompt use the following command: `npx create-react-app project_name --template typescript`.
-
+# CalendarApp - Progressive Web App
+## Making a PWA
 ### Description
-This repository has multiples branches for each project in the course. Firstly use `npm install`, later `npm start` to run de project.
+Starting with Create React App 4, you can add a src/service-worker.js file to your project to use the built-in support for Workbox's InjectManifest plugin, which will compile your service worker and inject into it a list of URLs to precache.
 
-### Branches
-*Bases*
-- [01-bases](https://github.com/Juxn89/ReactJs-Pro/tree/01-bases) | brush up to basic concept of react with TypeScript.
-- [02-react-app](https://github.com/Juxn89/ReactJs-Pro/tree/01-bases) | project base to use in other branches.
+If you start a new project using one of the PWA custom templates, you'll get a src/service-worker.js file that serves as a good starting point for an offline-first service worker:
 
-*React Router DOM v6*
-- [02-react-app-lazyload](https://github.com/Juxn89/ReactJs-Pro/tree/02-react-app-lazyload) | this brach is a fork from *02-react-app* and the purpouse is use lazyload in routes with *react router dom v6*.
-- [02-react-app-lazyload-nested](https://github.com/Juxn89/ReactJs-Pro/tree/02-react-app-lazyload-nested) | this brach is a fork from *02-react-app* and the purpouse is use lazyload and nested routes with *react router dom v6*.
+```npx create-react-app my-app --template cra-template-pwa```
 
-*Components Patterns*
-- [03-compound-component-pattern](https://github.com/Juxn89/ReactJs-Pro/tree/03-compound-component-pattern) | this brach is a fork from *02-react-app* and the purpouse is explain about *Compound Component Patter*.
-- [03-component-extend-style-pattern](https://github.com/Juxn89/ReactJs-Pro/tree/03-component-extend-style-pattern) | this brach is a fork from *03-compound-component-pattern* and the purpouse is explain about *Extensible Style* and *CSSProperties*.
-- [03-component-control-props-pattern](https://github.com/Juxn89/ReactJs-Pro/tree/03-component-control-props-pattern) | this brach is a fork from *03-component-extend-style-pattern* and the purpouse is explain about *Control Props Pattern*.
-- [03-component-control-props-pattern-alternative](https://github.com/Juxn89/ReactJs-Pro/tree/03-component-control-props-pattern-alternative) | this brach is a fork from *03-component-control-props-pattern* and the purpouse is explain about *State Initializer and Function Child*.
+The TypeScript equivalent is:
 
-*NPM Deploy*
+```npx create-react-app my-app --template cra-template-pwa-typescript```
+
+### Content
+- Service Worker.
+- Caché.
+- Instalation.
+- Fetch.
+- Caching strategies.
+  - Network first.
+  - Cache Only.
+  - Network first with cache fallback.
+
+### References
+- [create-react-app | Making a Progressive Web App](https://create-react-app.dev/docs/making-a-progressive-web-app/).
+- [The service worker lifecycle](https://web.dev/service-worker-lifecycle/).

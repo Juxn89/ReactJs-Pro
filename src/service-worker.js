@@ -70,3 +70,13 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+/* self is a rerefence to serviceWorker */
+self.addEventListener( 'install', async ( event ) => {
+  const cache = await caches.open('cache-1');
+  await cache.addAll([
+    'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+    '/favicon.ico'
+  ]);
+} );
