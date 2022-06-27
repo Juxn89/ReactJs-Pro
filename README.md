@@ -4,7 +4,7 @@
 Workbox is a tool tha Google bought and now soports. That allows powerfull, fast, and easy configurations for the management of our PWAs.
 
 ### Content
-- Dectec if the application is online or offline.
+- Detec if the application is online or offline.
 - Workbox.
   - Wizar.
   - Strategies.
@@ -18,4 +18,5 @@ Workbox is a tool tha Google bought and now soports. That allows powerfull, fast
 - ```workbox generateSW workbox-config.js```
 
 ### References
-- [Workbox](https://developer.chrome.com/docs/workbox/)
+- [Workbox](https://developer.chrome.com/docs/workbox/).
+- [Workbox background sync](https://developer.chrome.com/docs/workbox/modules/workbox-background-sync/).
