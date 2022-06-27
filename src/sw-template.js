@@ -39,3 +39,19 @@ registerRoute(
   }),
   'POST'
 );
+
+registerRoute(
+  new RegExp('http://localhost:4000/api/events'),
+  new NetworkOnly({
+    plugins: [ bgSyncPlugin ]
+  }),
+  'PUT'
+);
+
+registerRoute(
+  new RegExp('http://localhost:4000/api/events'),
+  new NetworkOnly({
+    plugins: [ bgSyncPlugin ]
+  }),
+  'DELETE'
+);
