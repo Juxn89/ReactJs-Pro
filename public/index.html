@@ -42,4 +42,12 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+    console.log('%NODE_ENV%');
+
+    const isProducction = ('%NODE_ENV%' === 'production');
+    if( isProducction && 'serviceWorker' in navigator ) {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
 </html>
