@@ -71,7 +71,7 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
-/* self is a rerefence to serviceWorker */
+/* self is a rerefence to service worker */
 self.addEventListener( 'install', async ( event ) => {
   const cache = await caches.open('cache-1');
   await cache.addAll([
@@ -81,6 +81,22 @@ self.addEventListener( 'install', async ( event ) => {
   ]);
 });
 
-self.addEventListener( 'fetch', (evet) => {
-  
+self.addEventListener( 'fetch', (event) => {
+  if(event.request.url !== 'http://localhost:4000/api/auth/renew') return;
+
+  const {request} = event;
+  const resp = fetch(request)
+      .then(response => {
+        caches.open('cache-dynamic').then(cache => {
+          cache.put(request, response);
+        });
+
+        return response.clone();
+      })
+      .catch(err => {
+        console.log('Offline response');
+        return caches.match(request);
+      });
+
+  event.responseWith(resp);
 });
