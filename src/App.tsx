@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
-import { Navigation } from './routes/Navigation';
 
 function App() {
   return (
     <Fragment>
-      <Navigation/>
+      <div className='App'>
+        <header className='App-header'>
+          <h1>Hello World! :)</h1>
+        </header>
+      </div>
     </Fragment>
   );
 }
