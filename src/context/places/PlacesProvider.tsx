@@ -1,4 +1,6 @@
+import { useReducer } from "react"
 import { PlacesContext } from "./PlacesContext"
+import { PlacesReducer } from "./PlacesRudecer"
 
 export interface PlacesState {
   isLoading: boolean,
@@ -15,8 +17,10 @@ const INITIAL_STATE: PlacesState = {
 }
 
 export const PlacesProvider = ({children}: Props) => {
+  const [state, dispatch] = useReducer(PlacesReducer, INITIAL_STATE);
+
   return (
-    <PlacesContext.Provider value={ {...INITIAL_STATE} }>
+    <PlacesContext.Provider value={ {...state} }>
       { children }
     </PlacesContext.Provider>
   )
