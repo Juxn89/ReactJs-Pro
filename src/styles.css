@@ -7,3 +7,12 @@
   top: 0;
   width: 100vw;
 }
+
+.mapDiv{
+  background-color: red;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
