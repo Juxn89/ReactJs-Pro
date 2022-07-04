@@ -3,10 +3,13 @@ import { getUserLocation } from "../../helpers"
 import { PlacesContext } from "./PlacesContext"
 import { PlacesReducer } from "./PlacesRudecer"
 import { searchAPI } from '../../apis';
+import { Feature, PlacesResponseInterface } from "../../interfaces/PlacesResponseInterface";
 
 export interface PlacesState {
   isLoading: boolean,
-  userLocation?: [number, number]
+  userLocation?: [number, number],
+  isLoadingPlaces: boolean,
+  places: Feature[]
 }
 
 interface Props {
@@ -15,7 +18,9 @@ interface Props {
 
 const INITIAL_STATE: PlacesState = {
   isLoading: true,
-  userLocation: undefined
+  userLocation: undefined,
+  isLoadingPlaces: false,
+  places: []
 }
 
 export const PlacesProvider = ({children}: Props) => {
@@ -27,18 +32,20 @@ export const PlacesProvider = ({children}: Props) => {
     )
   }, []);
 
-  const searchPlacesByTerm = async(query: string) => {
+  const searchPlacesByTerm = async(query: string): Promise<Feature[]> => {
     if(query.length === 0) return [];
     if(!state.userLocation) throw new Error('User location not detected...');
 
-    const resp = await searchAPI.get(`/${query}.json`, {
+    dispatch({ type: 'setLoadingPlaces' });
+
+    const resp = await searchAPI.get<PlacesResponseInterface>(`/${query}.json`, {
       params: {
         proximity: state.userLocation.join(',')
       }
     });
 
-    console.log(resp.data);
-    return resp.data;
+    dispatch({type: 'setPlaces', payload: resp.data.features});
+    return resp.data.features;
   }
 
 
