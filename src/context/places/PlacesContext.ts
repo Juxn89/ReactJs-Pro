@@ -4,6 +4,8 @@ import { Feature } from '../../interfaces/PlacesResponseInterface';
 export interface PlacesContextProps {
   isLoading: boolean,
   userLocation?: [number, number],
+  isLoadingPlaces: boolean,
+  places: Feature[]
 
   // Methods
   searchPlacesByTerm: (query: string) => Promise<Feature[]>;

@@ -6,7 +6,8 @@ const searchAPI = axios.create({
   params: {
     limit: 5,
     language: 'es',
-    access_token: API_KEYS.Mapbox
+    access_token: API_KEYS.Mapbox,
+    country: 'ni'
   }
 });
 

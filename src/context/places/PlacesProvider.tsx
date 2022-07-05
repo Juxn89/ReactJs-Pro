@@ -4,6 +4,7 @@ import { PlacesContext } from "./PlacesContext"
 import { PlacesReducer } from "./PlacesRudecer"
 import { searchAPI } from '../../apis';
 import { Feature, PlacesResponseInterface } from "../../interfaces/PlacesResponseInterface";
+import { features } from "process";
 
 export interface PlacesState {
   isLoading: boolean,
@@ -43,7 +44,7 @@ export const PlacesProvider = ({children}: Props) => {
         proximity: state.userLocation.join(',')
       }
     });
-
+    
     dispatch({type: 'setPlaces', payload: resp.data.features});
     return resp.data.features;
   }
