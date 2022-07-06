@@ -1,6 +1,8 @@
+/* eslint import/no-webpack-loader-syntax: off */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import mapboxgl from 'mapbox-gl';
+//@ts-ignore
+import mapboxgl from '!mapbox-gl';
 
 import {API_KEYS} from './config'
 
