@@ -6,8 +6,8 @@ import { Feature } from '../interfaces/PlacesResponseInterface';
 
 export const SearchResult = () => {
 
-  const { places, isLoadingPlaces } = useContext(PlacesContext);
-  const { map } = useContext(MapContext);
+  const { places, isLoadingPlaces, userLocation } = useContext(PlacesContext);
+  const { map, getRoutesBetweenPoints } = useContext(MapContext);
 
   const [ActiveId, setActiveId] = useState('');
 
@@ -31,6 +31,13 @@ export const SearchResult = () => {
     });
   }
 
+  const getRoutes = (place: Feature) => {
+    if(!userLocation) return;
+    const [lng, lat] = place.center;
+
+    getRoutesBetweenPoints(userLocation, [lng, lat]);
+  }
+
   return (
     <ul className='list-group mt-3'>
       {
@@ -40,7 +47,7 @@ export const SearchResult = () => {
             <p className='text-muted' style={ { fontSize: '12px' } }>
               {place.place_name}
             </p>
-            <button className={ `btn btn-sm ${ActiveId === place.id ? 'btn-outline-light' : 'btn-outline-primary'}` }>
+            <button className={ `btn btn-sm ${ActiveId === place.id ? 'btn-outline-light' : 'btn-outline-primary'}` } onClick={ () => getRoutes(place) }>
               Directions
             </button>
           </li>

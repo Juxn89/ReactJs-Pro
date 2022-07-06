@@ -12,8 +12,6 @@ export const SearchBar = () => {
       clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(() => {
-      console.log(`Debounde value: ${ event.target.value }`);
-
       const { value: query } = event.target;
       searchPlacesByTerm(query);
     }, 350);

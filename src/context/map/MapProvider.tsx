@@ -1,8 +1,10 @@
 import React, { useReducer, useContext, useEffect } from 'react';
-import { Map, Marker, Popup } from 'mapbox-gl';
+import { AnySourceData, LngLatBounds, Map, Marker, Popup } from 'mapbox-gl';
 
 import { PlacesContext, MapContext } from '../';
 import { MapReducer } from './MapReducer';
+import { direcctionsAPI } from '../../apis';
+import { DirecctionsResponse } from '../../interfaces/DirecctionsResponseInterface';
 
 interface Props {
   children?: JSX.Element | JSX.Element[]
@@ -60,8 +62,70 @@ export const MapProvider = ( { children }: Props ) => {
     dispatch({type: 'setMap', payload: map});
   }
 
+  const getRoutesBetweenPoints = async (start: [number, number], end: [number, number]) => {
+    const resp = await direcctionsAPI.get<DirecctionsResponse>(`/${ start.join(',') };${ end.join(',') }`);
+
+    const { distance, duration, geometry } = resp.data.routes[0];
+    const { coordinates: coords } = geometry;
+    let kms = distance / 1000;
+        kms = Math.round(kms * 100);
+        kms /= 100;
+
+    let minutes = Math.floor(duration / 60);
+
+    // console.log({kms, minutes});
+    // console.log('Direcctions: ', resp);
+
+    const bounds = new LngLatBounds(start, start);
+    for (const coord of coords) {
+      const newCoord: [number, number] = [coord[0], coord[1]];
+      bounds.extend(newCoord);
+    }
+
+    state.map?.fitBounds(bounds, {
+      padding: 200
+    })
+
+    // Polyline
+    const sourceData: AnySourceData = {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: coords
+            }
+          }
+        ]
+      }
+    }
+
+    if(state.map?.getLayer('RouteString')){
+      state.map.removeLayer('RouteString');
+      state.map.removeSource('RouteString');
+    }
+    state.map?.addSource('RouteString', sourceData);
+    state.map?.addLayer({
+      id: 'RouteString',
+      type: 'line',
+      source: 'RouteString',
+      layout: {
+        'line-cap': 'round',
+        'line-join': 'round'
+      },
+      paint: {
+        'line-color': 'black',
+        'line-width': 3
+      }
+    });
+  }
+
   return (
-    <MapContext.Provider value={ { ...state, setMap } }>
+    <MapContext.Provider value={ { ...state, setMap, getRoutesBetweenPoints } }>
       { children }
     </MapContext.Provider>
   )
